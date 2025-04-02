@@ -327,6 +327,7 @@ ret_code ModelSimSegmInit( int model )
     /* v2.09: execute always, to make a proper listing if fastpass is off */
     //if ( Parse_Pass == PASS_1 ) {
         DebugMsg1(("ModelSimSegmInit() enter, pass one\n" ));
+#if 0
         /* create default code segment (_TEXT) */
         SetSimSeg( SIM_CODE, NULL );
         EndSimSeg( SIM_CODE );
@@ -334,6 +335,7 @@ ret_code ModelSimSegmInit( int model )
         /* create default data segment (_DATA) */
         SetSimSeg( SIM_DATA, NULL ) ;
         EndSimSeg( SIM_DATA );
+#endif
 
         /* create DGROUP for BIN/OMF if model isn't FLAT */
         if( model != MODEL_FLAT &&
@@ -346,8 +348,8 @@ ret_code ModelSimSegmInit( int model )
             if( model == MODEL_TINY ) {
                 strcat( buffer, ", %s" );
                 AddLineQueueX( buffer, szDgroup, T_GROUP, SegmNames[SIM_CODE], SegmNames[SIM_DATA] );
-            } else
-                AddLineQueueX( buffer, szDgroup, T_GROUP, SegmNames[SIM_DATA] );
+            } else if(!ModuleInfo.m510)
+         	AddLineQueueX( buffer, szDgroup, T_GROUP, SegmNames[SIM_DATA] );
         }
         DebugMsg1(("ModelSimSegmInit() exit\n" ));
     //}

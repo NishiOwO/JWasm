@@ -447,8 +447,8 @@ ret_code GrpDir( int i, struct asm_tok tokenarray[] )
                       seg->e.seginfo->group != &ModuleInfo.flat_grp->sym &&
                       seg->e.seginfo->group != &grp->sym ) {
                 /* segment is in another group */
-                DebugMsg(("GrpDir: segment >%s< is in group >%s< already\n", name, seg->e.seginfo->group->name));
-                return( EmitErr( SEGMENT_IN_ANOTHER_GROUP, name ) );
+               	DebugMsg(("GrpDir: segment >%s< is in group >%s< already\n", name, seg->e.seginfo->group->name));
+               	return( EmitErr( SEGMENT_IN_ANOTHER_GROUP, name ) );
             }
             /* the first segment will define the group's word size */
             if( grp->e.grpinfo->seglist == NULL ) {

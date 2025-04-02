@@ -115,7 +115,11 @@ static void FarCallToNear( struct code_info *CodeInfo )
     if( Parse_Pass == PASS_2 )
         EmitWarn( 4, CALL_FAR_TO_NEAR );
 
-    OutputCodeByte( 0x0E ); /* 0x0E is "PUSH CS" opcode */
+#if 0
+    if(IS_CALL(CodeInfo->token) && CodeInfo->mem_type == MT_FAR){
+    	OutputCodeByte( 0x0E ); /* 0x0E is "PUSH CS" opcode */
+    }
+#endif
     CodeInfo->mem_type = MT_NEAR;
 
     return;

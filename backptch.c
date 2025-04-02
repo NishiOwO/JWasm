@@ -91,9 +91,12 @@ static void DoPatch( struct asym *sym, struct fixup *fixup )
              * (only at first pass) */
             DebugMsg(("DoPatch: Phase error! caused by far call optimization\n"));
             ModuleInfo.PhaseError = TRUE;
+
+#if 0
             sym->offset++;  /* a PUSH CS will be added */
             /* todo: insert LABELOPT block here */
-            OutputByte( 0 ); /* it's pass one, nothing is written */
+	    OutputByte( 0 ); /* it's pass one, nothing is written */
+#endif
             FreeFixup( fixup );
             return;
         //} else if( sym->mem_type == MT_NEAR ) {
@@ -152,7 +155,7 @@ static void DoPatch( struct asym *sym, struct fixup *fixup )
                     size++;
                     /* fall through */
                 default: /* normal JMP (and PUSH) */
-                    // if( CodeInfo->Ofssize ) /* v1.96: don't use CodeInfo here! */
+                    // if( CodeInfo->Ofssize ) /* v1.96: don't use CodeInfo here! 
                     if( seg->e.seginfo->Ofssize )
                         size += 2; /* NEAR32 instead of NEAR16 */
                     size++;
